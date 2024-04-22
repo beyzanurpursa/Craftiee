@@ -14,13 +14,13 @@ class HomePage extends StatelessWidget {
               Column(
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(top: 50, left: 70),
+                    padding: EdgeInsets.only(top: 80, left: 60),
                     child: Text(
                       "Craftiee",
                       style: TextStyle(
-                          color: Color.fromARGB(255, 60, 89, 59),
+                          color: Color.fromARGB(255, 25, 24, 24),
                           fontSize: 28,
-                          fontWeight: FontWeight.w900,
+                          fontWeight: FontWeight.bold,
                           fontFamily: 'Montserrat'),
                     ),
                   ),
@@ -29,7 +29,7 @@ class HomePage extends StatelessWidget {
                     child: Text(
                       "Best gifts for you and loved ones",
                       style: TextStyle(
-                          color: Color.fromARGB(255, 90, 115, 90),
+                          color: Color.fromARGB(255, 25, 24, 24),
                           fontSize: 16,
                           fontWeight: FontWeight.w100,
                           fontFamily: 'Montserrat'),
@@ -42,10 +42,9 @@ class HomePage extends StatelessWidget {
           Row(
             children: [
               Padding(
-                padding:
-                    EdgeInsets.only(top: 20, left: 20, bottom: 10, right: 10),
+                padding: EdgeInsets.only(top: 30, left: 20, bottom: 10),
                 child: Container(
-                  width: 320,
+                  width: 300,
                   height: 50,
                   decoration: BoxDecoration(
                       border: Border.all(
@@ -63,7 +62,7 @@ class HomePage extends StatelessWidget {
                             child: Icon(
                               Icons.search,
                               size: 30,
-                              color: Color.fromARGB(255, 151, 166, 151),
+                              color: Color.fromARGB(255, 25, 24, 24),
                             ),
                           ),
                         ],
@@ -73,18 +72,17 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 15, right: 20),
+                padding: const EdgeInsets.only(top: 30, left: 20),
                 child: Icon(
-                  Icons.shopping_cart_outlined,
-                  size: 35,
-                  color: Color.fromARGB(255, 151, 166, 151),
+                  Icons.shopping_cart,
+                  size: 30,
                 ),
               )
             ],
           ),
           Divider(),
           Padding(
-            padding: const EdgeInsets.only(top: 5.0, left: 25),
+            padding: const EdgeInsets.only(top: 8.0, left: 25),
             child: Row(
               children: [
                 Text(
@@ -93,7 +91,7 @@ class HomePage extends StatelessWidget {
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Montserrat',
-                    color: Color.fromARGB(255, 60, 89, 59),
+                    color: Color.fromARGB(255, 0, 0, 0),
                   ),
                 )
               ],
@@ -127,7 +125,7 @@ class HomePage extends StatelessWidget {
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Montserrat',
-                    color: Color.fromARGB(255, 60, 89, 59),
+                    color: Color.fromARGB(255, 0, 0, 0),
                   ),
                 )
               ],
@@ -153,7 +151,6 @@ class HomePage extends StatelessWidget {
           ),
         ]),
       ),
-      bottomNavigationBar: BottomMenu(),
     );
   }
 }
@@ -201,7 +198,7 @@ Container Products(String image, String title, String price) {
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
                         fontFamily: 'Montserrat',
-                        color: Color.fromARGB(255, 60, 89, 59),
+                        color: Color.fromARGB(236, 8, 8, 8),
                       ),
                     ),
                     Row(
@@ -209,11 +206,10 @@ Container Products(String image, String title, String price) {
                         Text(
                           price,
                           style: TextStyle(
-                            fontSize: 15,
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.w600,
-                            color: Color.fromARGB(255, 60, 89, 59),
-                          ),
+                              fontSize: 15,
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.w600,
+                              color: Color.fromARGB(255, 69, 69, 69)),
                         ),
                       ],
                     ),
@@ -241,7 +237,7 @@ Container Products(String image, String title, String price) {
                                 child: Icon(
                                   Icons.add,
                                   size: 26,
-                                  color: Color.fromARGB(255, 151, 166, 151),
+                                  color: Color.fromARGB(195, 25, 24, 24),
                                 ),
                               ),
                             ),
@@ -258,9 +254,9 @@ Container Products(String image, String title, String price) {
                               ),
                               borderRadius: BorderRadius.circular(5)),
                           child: Icon(
-                            Icons.favorite_border_outlined,
+                            Icons.favorite,
                             size: 26,
-                            color: Color.fromARGB(255, 151, 166, 151),
+                            color: Color.fromARGB(195, 25, 24, 24),
                           ),
                         ),
                       ],
@@ -272,56 +268,6 @@ Container Products(String image, String title, String price) {
           )
         ],
       ),
-    ),
-  );
-}
-
-Widget BottomMenu() => Container(
-      width: double.infinity,
-      height: 60,
-      decoration: BoxDecoration(
-          border:
-              Border.all(color: Color.fromARGB(255, 186, 186, 186), width: 1)),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          BottomMenuItem("Home", Icons.home_rounded, true),
-          BottomMenuItem("Categories", Icons.list, false),
-          BottomMenuItem("Favorite", Icons.favorite_border_outlined, false),
-          BottomMenuItem("Profile", Icons.person_2_outlined, false),
-        ],
-      ),
-    );
-
-Widget BottomMenuItem(String title, IconData icon, bool active) {
-  var renk = Color.fromARGB(255, 151, 166, 151);
-
-  if (active) {
-    renk = Color.fromARGB(255, 35, 64, 34);
-  }
-
-  return Padding(
-    padding: const EdgeInsets.all(5.0),
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      mainAxisSize: MainAxisSize.max,
-      children: [
-        Icon(
-          icon,
-          size: 25,
-          color: renk,
-        ),
-        SizedBox(
-          height: 3,
-        ),
-        Text(
-          title,
-          style: TextStyle(
-            fontSize: 10,
-            color: renk,
-          ),
-        ),
-      ],
     ),
   );
 }
