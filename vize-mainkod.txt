@@ -1,273 +1,138 @@
+-----BOARDING
+import '../core/storage.dart';
+// import '../Screens/Core/loader.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:preload_page_view/preload_page_view.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class Boarding extends StatefulWidget {
+  const Boarding({super.key});
+  @override
+  State<Boarding> createState() => _BoardingState();
+}
+
+class _BoardingState extends State<Boarding> {
+  int page = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 253, 247, 241),
-      body: SingleChildScrollView(
-        child: Column(children: [
-          Row(
-            children: const [
-              Column(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(top: 80, left: 60),
-                    child: Text(
-                      "Craftiee",
+      body: SafeArea(
+        child: PreloadPageView(
+          onPageChanged: (value) {
+            setState(() {
+              page = value;
+            });
+          },
+          children: [
+            Container(
+              width: double.infinity,
+              height: 750,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage("assets/images/background3.jpg")),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 350, top: 10),
+                child: InkWell(
+                  onTap: () async {
+                    final storage = Storage();
+                    await storage.FirstLauched();
+                    GoRouter.of(context).replace("/FirstPage");
+                  },
+                  child: Text("Skip",
                       style: TextStyle(
-                          color: Color.fromARGB(255, 25, 24, 24),
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'Montserrat'),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 70),
-                    child: Text(
-                      "Best gifts for you and loved ones",
-                      style: TextStyle(
-                          color: Color.fromARGB(255, 25, 24, 24),
-                          fontSize: 16,
-                          fontWeight: FontWeight.w100,
-                          fontFamily: 'Montserrat'),
-                    ),
-                  ),
-                ],
-              )
-            ],
-          ),
-          Row(
-            children: [
-              Padding(
-                padding: EdgeInsets.only(top: 30, left: 20, bottom: 10),
-                child: Container(
-                  width: 300,
-                  height: 50,
-                  decoration: BoxDecoration(
-                      border: Border.all(
-                        width: 1.5,
-                        color: Color.fromARGB(195, 25, 24, 24),
-                      ),
-                      borderRadius: BorderRadius.circular(25)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: const [
-                      Row(
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.only(right: 8.0),
-                            child: Icon(
-                              Icons.search,
-                              size: 30,
-                              color: Color.fromARGB(255, 25, 24, 24),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                          fontSize: 14,
+                          color: Color.fromARGB(255, 23, 24, 23),
+                          fontWeight: FontWeight.w500,
+                          fontFamily: 'Montserrat')),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 30, left: 20),
-                child: Icon(
-                  Icons.shopping_cart,
-                  size: 30,
-                ),
-              )
-            ],
-          ),
-          Divider(),
-          Padding(
-            padding: const EdgeInsets.only(top: 8.0, left: 25),
-            child: Row(
-              children: [
-                Text(
-                  "New Products",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Montserrat',
-                    color: Color.fromARGB(255, 0, 0, 0),
-                  ),
-                )
-              ],
             ),
-          ),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    Products("assets/images/bag.jpg", "Shoulder Bag", "400 ₺"),
-                    Products(
-                        "assets/images/makrome_-5.jpg", "Napkin Ring", "60 ₺"),
-                    Products(
-                        "assets/images/IMG_7285.JPG", "Bag Hanger", "250 ₺"),
-                    Products(
-                        "assets/images/IMG_7296.JPG", "Bag Hanger", "200 ₺"),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 8.0, left: 25),
-            child: Row(
-              children: [
-                Text(
-                  "Recommended",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Montserrat',
-                    color: Color.fromARGB(255, 0, 0, 0),
-                  ),
-                )
-              ],
-            ),
-          ),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    Products("assets/images/bag.jpg", "Shoulder Bag", "400 ₺"),
-                    Products(
-                        "assets/images/makrome_-5.jpg", "Napkin Ring", "60 ₺"),
-                    Products(
-                        "assets/images/IMG_7285.JPG", "Bag Hanger", "250 ₺"),
-                    Products(
-                        "assets/images/IMG_7296.JPG", "Bag Hanger", "200 ₺"),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ]),
+          ],
+        ),
       ),
     );
   }
 }
 
-Container Products(String image, String title, String price) {
-  return Container(
-    padding: const EdgeInsets.all(20),
-    child: Container(
-      padding: EdgeInsets.only(top: 10, left: 5, right: 5),
-      width: 280,
-      height: 350,
-      decoration: BoxDecoration(
-        border: Border.all(
-          width: 1.5,
-          color: Color.fromARGB(195, 25, 24, 24),
-        ),
-        borderRadius: BorderRadius.circular(25),
-      ),
-      child: Column(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(25),
-            child: Image(
-              image: AssetImage(image),
-              width: 250,
-              height: 250,
-              fit: BoxFit.cover,
+
+----LOADER
+import 'package:go_router/go_router.dart';
+
+import '../../core/storage.dart';
+import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
+
+class LoaderScreen extends StatefulWidget {
+  const LoaderScreen({super.key});
+
+  @override
+  State<LoaderScreen> createState() => _LoaderScreenState();
+}
+
+class _LoaderScreenState extends State<LoaderScreen> {
+  loadApp() async {
+    final storage = Storage();
+    final FirstLaunch = await storage.isFirstLaunch();
+    if (FirstLaunch) {
+      GoRouter.of(context).replace('/Boarding');
+    } else {
+      GoRouter.of(context).replace('/FirstPage');
+    }
+  }
+
+  void initState() {
+    super.initState();
+    loadApp();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: Center(
+          child: Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Loading Screen",
+                  style: TextStyle(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 20,
+                  ),
+                ),
+                Gap(10),
+                CircularProgressIndicator(),
+              ],
             ),
           ),
-          SizedBox(
-            height: 8,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Padding(
-                padding: EdgeInsets.only(left: 15, top: 10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      title,
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                        fontFamily: 'Montserrat',
-                        color: Color.fromARGB(236, 8, 8, 8),
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          price,
-                          style: TextStyle(
-                              fontSize: 15,
-                              fontFamily: 'Montserrat',
-                              fontWeight: FontWeight.w600,
-                              color: Color.fromARGB(255, 69, 69, 69)),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(right: 8.0, top: 10),
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        Column(
-                          children: [
-                            Container(
-                              width: 35,
-                              height: 35,
-                              decoration: BoxDecoration(
-                                  border: Border.all(
-                                    width: 1.5,
-                                    color: Color.fromARGB(195, 25, 24, 24),
-                                  ),
-                                  borderRadius: BorderRadius.circular(5)),
-                              child: Container(
-                                child: Icon(
-                                  Icons.add,
-                                  size: 26,
-                                  color: Color.fromARGB(195, 25, 24, 24),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Padding(padding: EdgeInsets.only(left: 10, top: 10)),
-                        Container(
-                          width: 35,
-                          height: 35,
-                          decoration: BoxDecoration(
-                              border: Border.all(
-                                width: 1.5,
-                                color: Color.fromARGB(195, 25, 24, 24),
-                              ),
-                              borderRadius: BorderRadius.circular(5)),
-                          child: Icon(
-                            Icons.favorite,
-                            size: 26,
-                            color: Color.fromARGB(195, 25, 24, 24),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          )
-        ],
+        ),
       ),
-    ),
-  );
+    );
+  }
 }
+
+
+----STORAGE
+import 'package:shared_preferences/shared_preferences.dart';
+
+class Storage {
+  Future<bool> isFirstLaunch() async {
+    final SharedPreferences storage = await SharedPreferences.getInstance();
+    final runned = storage.getBool("ruuned");
+
+    if (runned == null) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  clearStorage() async {
+    final SharedPreferences storage = await SharedPreferences.getInstance();
+    await storage.clear();
+  }
+}
+
